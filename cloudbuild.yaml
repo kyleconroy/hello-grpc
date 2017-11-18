@@ -2,3 +2,4 @@ steps:
 - name: gcr.io/cloud-builders/bazel
   args: ['build', '//srv']
 
+timeout: 1800s
