@@ -1,4 +1,3 @@
-load("@io_bazel_rules_go//proto:def.bzl", "go_grpc_library")
 load("@io_bazel_rules_go//go:def.bzl", "gazelle", "go_library")
 
 gazelle(
@@ -6,37 +5,13 @@ gazelle(
     prefix = "github.com/kyleconroy/hellogrpc",
 )
 
-proto_library(
-    name = "helloworld_proto",
-    srcs = ["helloworld.proto"],
-    visibility = ["//visibility:public"],
-)
-
-go_grpc_library(
-    name = "helloworld_go_proto",
-    importpath = "github.com/kyleconroy/hellogrpc",
-    proto = ":helloworld_proto",
-    visibility = ["//visibility:public"],
-)
-
 go_library(
     name = "go_default_library",
     srcs = ["hellogrpc.go"],
     importpath = "github.com/kyleconroy/hellogrpc",
-    library = ":hellogrpc_go_proto",
     visibility = ["//visibility:public"],
-    deps = ["@org_golang_google_grpc//:go_default_library"],
-)
-
-proto_library(
-    name = "hellogrpc_proto",
-    srcs = ["hellogrpc.proto"],
-    visibility = ["//visibility:public"],
-)
-
-go_grpc_library(
-    name = "hellogrpc_go_proto",
-    importpath = "github.com/kyleconroy/hellogrpc",
-    proto = ":hellogrpc_proto",
-    visibility = ["//visibility:public"],
+    deps = [
+        "//pb:go_default_library",
+        "@org_golang_google_grpc//:go_default_library",
+    ],
 )

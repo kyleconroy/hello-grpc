@@ -4,6 +4,7 @@ import (
 	"context"
 	"net"
 
+	"github.com/kyleconroy/hellogrpc/pb"
 	"google.golang.org/grpc"
 )
 
@@ -15,8 +16,8 @@ const (
 type server struct{}
 
 // SayHello implements helloworld.GreeterServer
-func (s *server) SayHello(ctx context.Context, in *HelloRequest) (*HelloReply, error) {
-	return &HelloReply{Message: "Hello " + in.Name}, nil
+func (s *server) SayHello(ctx context.Context, in *pb.HelloRequest) (*pb.HelloReply, error) {
+	return &pb.HelloReply{Message: "Hello " + in.Name}, nil
 }
 
 func Serve() error {
@@ -25,7 +26,7 @@ func Serve() error {
 		return err
 	}
 	s := grpc.NewServer()
-	RegisterGreeterServer(s, &server{})
+	pb.RegisterGreeterServer(s, &server{})
 	// Register reflection service on gRPC server.
 	return s.Serve(lis)
 }

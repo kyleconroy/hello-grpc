@@ -14,7 +14,10 @@
 
 syntax = "proto3";
 
-package hellogrpc;
+package pb;
+
+// Why is this needed?
+option go_package = "github.com/kyleconroy/hellogrpc/pb";
 
 // The greeting service definition.
 service Greeter {
