@@ -4,6 +4,8 @@ steps:
     'build', 
     '--spawn_strategy=remote',
     '--remote_rest_cache=https://bazelcas.herokuapp.com/',
+    '--strategy=Javac=remote',
+    '--strategy=Closure=remote',
     '//srv',
   ]
 
