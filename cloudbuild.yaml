@@ -1,5 +1,10 @@
 steps:
 - name: gcr.io/cloud-builders/bazel
-  args: ['build', '//srv']
+  args: [
+    'build', 
+    '--spawn_strategy=remote',
+    '--remote_rest_cache=https://bazelcas.herokuapp.com/',
+    '//srv',
+  ]
 
 timeout: 1800s
